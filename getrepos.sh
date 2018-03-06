@@ -35,13 +35,15 @@ if [ ! -d "${repo}" ]; then
 echo "----> Cloning ${repo} <----";
 git clone "${repobase}/${repo}.git";
 echo "----> Checking out ${repoCommits[${repo}]} <----";
+cd $(echo ${repo} | grep -oP '/\K(.*)');
 git checkout "${repoCommits[${repo}]}";
+cd ..;
 echo "----> Cloned ${repo} <----";
 else
 echo "----> Pulling ${repo} <----";
 
 # Put us into the addon directory
-cd "${repo}";
+cd $(echo ${repo} | grep -oP '/\K(.*)');
 pwd;
 
 # Pull the latest verison from GitHub
